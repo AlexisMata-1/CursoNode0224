@@ -36,7 +36,7 @@ app.post("/create",(req,res)=>{
 
 app.get("/empleados",(req,res)=>{
    
-    db.query('SELECT * FROM empleados',
+    db.query('SELECT * FROM empleados;',
     (err,result)=>{
         if(err){
             console.log(err);
@@ -63,6 +63,21 @@ app.put("/update",(req,res)=>{
             console.log(err);
         }else{
             res.send("Empleado actualizado con exito")
+        }
+    }
+    );
+
+});
+
+app.delete("/delete/:id",(req,res)=>{
+    const id = req.params.id;
+
+    db.query('DELETE FROM empleados WHERE id=?', id,
+    (err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send("Empleado eliminado con exito")
         }
     }
     );
